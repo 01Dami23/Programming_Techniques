@@ -9,7 +9,7 @@ int main()
     int comprimi(FILE *fin, FILE *fout);
     int decomprimi(FILE *fin, FILE *fout);
 
-    // chiedo all'utente se vuole fare la codifica del file sorgente o la decodifica del file codificato
+    /* to encode the source file or decode the encoded file */
     printf("Enter (C) to compress the file, (D) to decompress:\n");
     scanf("%c", &user_input);
 
@@ -23,7 +23,7 @@ int main()
                 printf("Error opening output file\n");
                 return 2;
             }
-            // eseguo la funzione per codificare il file
+            
             result = comprimi(fin, f_compressed);
 
             if (result == 0) {
@@ -31,7 +31,7 @@ int main()
             } else {
                 printf("The new compressed file has: %d characters\n", result);
             }
-            // chiudo i file aperti
+            
             fclose(fin);
             fclose(f_compressed);
             break;
@@ -45,7 +45,7 @@ int main()
                 printf("Error opening output file\n");
                 return 4;
             }
-            // eseguo la funzione per decodificare
+            
             result = decomprimi(f_compressed, f_decompressed);
 
             if (result == 0) {
@@ -53,7 +53,7 @@ int main()
             } else {
                 printf("The new decompressed file has: %d characters\n", result);
             }
-            // chiudo i file aperti
+            
             fclose(f_compressed);
             fclose(f_decompressed);
             break;
@@ -110,7 +110,7 @@ int decomprimi(FILE *fin, FILE *fout) {
     int char_num = 0;
 
     previous_char = fgetc(fin);
-    // controllo che il primo carattere non sia '$' (non avbrebbe senso nel file codificato)
+    
     if (previous_char == '$') {
         return 0;
     }else {
