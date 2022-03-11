@@ -20,22 +20,20 @@ int main(void) {
         return EXIT_FAILURE;
     }
 
-    // leggo il numero di vettori da ordinare
     fscanf(fin, "%d", &num_vettori);
 
     for (i = 0; i < num_vettori; i++) {
         fscanf(fin, "%d", &num_numeri);
 
-        // salvo la sequenza
+        /* i save the sequence */
         for (j = 0; j < num_numeri; j++) {
             fscanf(fin, "%d", &vettore[j]);
-            /* copio tutto in un altri vettori copia, per non ordinare sempre quello originale, che altrimenti risulta
-               inutilizzabile dopo il primo ordinamento */
+            /* I copy everything in other vectors to avoid sorting the original vector multiple times, which would be already sorted after the first attempt */
             vettore_copia1[j] = vettore[j];
             vettore_copia2[j] = vettore[j];
         }
 
-        // per ogni sequenza di vettori applico i 3 algoritmi di ordinamento
+        /* I apply the 3 sorting algorithms to every sequence of vectors */
         SelectionSort(vettore_copia1, num_numeri);
         InsertionSort(vettore, num_numeri);
         ShellSort(vettore_copia2, num_numeri);
@@ -54,7 +52,6 @@ void InsertionSort(int vettore[], int N) {
     int iterazioni_esterne = 0, iterazioni_tot, num_scambi = 0;
     int iterazioni_interne[MAXLEN], iterazioni_interne_tot = 0;
 
-    // inizializzo a zero il vettore con i valori delle iterazioni interne
     for (i = 0; i < MAXLEN; i++ ) {
         iterazioni_interne[i] = 0;
     }
@@ -63,8 +60,7 @@ void InsertionSort(int vettore[], int N) {
         x = vettore[i];
         j = i - 1;
         iterazioni_esterne++;
-        /* conto come scambio sia, lo spostare un numero del vettore ordinato verso destra, sia copiare
-         * in una casella vuota un nuovo numero */
+        
         while (j >= l && x < vettore[j]) {
             vettore[j + 1] = vettore[j];
             j--;
@@ -79,7 +75,7 @@ void InsertionSort(int vettore[], int N) {
 
 
     iterazioni_tot = iterazioni_esterne + iterazioni_interne_tot;
-    /* faccio stampare i dati dell'ordinamento ad ogni chiamata delle funzioni per ordinare i vettori */
+    
     printf("Vettore ordinato tramite: Insertion sort\n");
     stampaDati(N, vettore, num_scambi, iterazioni_esterne, iterazioni_interne, iterazioni_tot);
 }
@@ -93,7 +89,6 @@ void SelectionSort(int vettore[], int N) {
     int iterazioni_esterne = 0, iterazioni_tot, num_scambi = 0;
     int iterazioni_interne[MAXLEN], iterazioni_interne_tot = 0;
 
-    // inizializzo a zero il vettore con i valori delle iterazioni interne
     for (k = 0; k < MAXLEN; k++ ) {
         iterazioni_interne[k] = 0;
     }
@@ -114,7 +109,6 @@ void SelectionSort(int vettore[], int N) {
             temp = vettore[i];
             vettore[i] = vettore[min];
             vettore[min] = temp;
-            /* conto come scambio quello che viene fatto tra il numero minimo e quello all'inizio del sottovettore destro */
             num_scambi++;
         }
     }
@@ -125,13 +119,12 @@ void SelectionSort(int vettore[], int N) {
 }
 
 
-/* SHELL SORT con sequenza di Knuth*/
+/* SHELL SORT with Knuth's formula*/
 void ShellSort(int vettore[], int N) {
     int i, j, x, l = 0, r = N - 1, h = 1, k, indice = 0;
     int iterazioni_esterne = 0, iterazioni_tot, num_scambi = 0;
     int iterazioni_interne[200], iterazioni_interne_tot = 0;
 
-    // inizializzo a zero il vettore con i valori delle iterazioni interne
     for (k = 0; k < 200; k++ ) {
         iterazioni_interne[k] = 0;
     }
