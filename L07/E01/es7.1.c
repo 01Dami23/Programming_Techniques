@@ -28,7 +28,6 @@ int main(void) {
         return EXIT_FAILURE;
     }
 
-    // inizializzo a zero i campi del vettore di struct
     for (i = 0; i < 3; i++) {
         aree[i].base = 0;
         aree[i].altezza = 0;
@@ -90,7 +89,7 @@ void leggiRettangolo(int matrice[MAXR][MAXC], int estremo_sup_sx[2], int row_num
 
     area = base * altezza;
 
-    // in caso di parità in uno dei campi viene considerato il primo rettangolo trovato
+    /* for the cases of equality in one of the fields I consider the first rectangle I find */
     if (base > aree[0].base) {
         valore = 0;
         assegnaValori(aree, estremo_sup_sx, base, altezza, area, valore);
