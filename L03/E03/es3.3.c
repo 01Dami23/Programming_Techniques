@@ -5,7 +5,7 @@
 int main()
 {
     FILE *fin;
-    int first, second, xi;  // first == x(i-2), second == x(i-1)
+    int first, second, xi;  /* first == x(i-2), second == x(i-1) */
     int discarded = 0, max_num, min_num;
 
     if ((fin = fopen(filein, "r")) == NULL) {
@@ -13,7 +13,7 @@ int main()
         return 1;
     }
 
-    // prendo i primi 2 numeri
+    /* i take the first two numbers */
     fscanf(fin, "%d%d", &first, &second);
 
     max_num = (first >= second) ? first : second;
@@ -32,7 +32,7 @@ int main()
             first = second;
             second = xi;
         }
-        // numeri non validi
+        /* invalid numbers */
         else {
             discarded++;
         }
