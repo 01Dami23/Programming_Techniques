@@ -46,10 +46,10 @@ int main(void) {
         return EXIT_FAILURE;
     }
 
-    /*chiamo la funzione che prende i dati e li inserisce in un vettore di struct*/
+    /* I call the function which takes the data and inserts it in a struct vector */
     num_righe = leggiFile(fin, dati);
 
-    /*chiamo la funzione con il costrutto switch, per eseguire i diversi comandi*/
+    /* I call the function with the switch statement, to execute the commands on user's request*/
     menuParola(dati, num_righe);
 
     fclose(fin);
@@ -91,13 +91,12 @@ comando_e leggiComando(void) {
 void menuParola(dati_corse dati[MAXRIGHE], int num_righe) {
     char parametri[2][MAXCHAR];
     int flag = 1, i;
-    int tipo_fermata; /*0 se partenza, 1 se capolinea*/
-    int flag_ritardo; /*0 se corse tra date, 1 se corse tra date con ritardo*/
+    int tipo_fermata; /*0 for departure, 1 for terminal */
+    int flag_ritardo; /*0 for rides between dates, 1 for rides between dates with delay*/
     comando_e cmd;
 
     while (flag) {
 
-        /*chiamo la funzione che chiede all'utente il comando*/
         cmd = leggiComando();
 
         switch (cmd) {
@@ -146,7 +145,7 @@ void corse_tra_date(dati_corse dati[MAXRIGHE], int num_righe, char parametri[2][
     strcpy(data1, parametri[0]);
     strcpy(data2, parametri[1]);
 
-    /* il codice e' ripetuto 2 volte, per accettare le date sia in ordine crescente, sia in ordine decrescente */
+    /* the code is repeated twice, to accept dates in both orders, ascending and descending */
     if (strcmp(data1, data2) <= 0) {
         for (i = 0; i < num_righe; i++) {
             strcpy(data_corsa, dati[i].data);
@@ -155,7 +154,7 @@ void corse_tra_date(dati_corse dati[MAXRIGHE], int num_righe, char parametri[2][
                     printf("%s %s %s %s %s %s %d\n", dati[i].codice_tratta, dati[i].partenza, dati[i].capolinea,
                            dati[i].data, dati[i].ora_partenza, dati[i].ora_arrivo, dati[i].ritardo);
                 }
-                /*nel caso di flag_ritardo == 1 controllo se ho ritardo e in caso affermativo stampo la corsa*/
+                /* in the case of flag_ritardo == 1 I check if I have delay and if so i print the ride */
                 else if (flag_ritardo == 1 && dati[i].ritardo != 0) {
                     printf("%s %s %s %s %s %s %d\n", dati[i].codice_tratta, dati[i].partenza, dati[i].capolinea,
                            dati[i].data, dati[i].ora_partenza, dati[i].ora_arrivo, dati[i].ritardo);
@@ -172,7 +171,7 @@ void corse_tra_date(dati_corse dati[MAXRIGHE], int num_righe, char parametri[2][
                     printf("%s %s %s %s %s %s %d\n", dati[i].codice_tratta, dati[i].partenza, dati[i].capolinea,
                            dati[i].data, dati[i].ora_partenza, dati[i].ora_arrivo, dati[i].ritardo);
                 }
-                /*nel caso di flag_ritardo == 1 controllo se ho ritardo e in caso affermativo stampo la corsa*/
+                /* in the case of flag_ritardo == 1 I check if I have delay and if so i print the ride */
                 else if (flag_ritardo == 1 && dati[i].ritardo != 0) {
                     printf("%s %s %s %s %s %s %d\n", dati[i].codice_tratta, dati[i].partenza, dati[i].capolinea,
                            dati[i].data, dati[i].ora_partenza, dati[i].ora_arrivo, dati[i].ritardo);
@@ -195,7 +194,7 @@ void corse_da_fermata(dati_corse dati[MAXRIGHE], int num_righe, char parametri[2
 
     strcpy(fermata, parametri[0]);
 
-    /* per cercare le tratte in cui la partenza corrisponde alla fermata cercata */
+    /* to search for the rides in which the departure is the same as the wanted stop */
     if (tipo_fermata == 0) {
         for (i = 0; i < num_righe; i++) {
             strcpy(fermata_corsa, dati[i].partenza);
@@ -210,7 +209,7 @@ void corse_da_fermata(dati_corse dati[MAXRIGHE], int num_righe, char parametri[2
             printf("No bus rides starting from here\n\n");
         }
     }
-    /* per cercare le tratte in cui il capolinea corrisponde con quello cercato */
+    /* to search for the rides in which the terminal is the same as the wanted stop */
     else if (tipo_fermata == 1){
         for (i = 0; i < num_righe; i++) {
             strcpy(fermata_corsa, dati[i].capolinea);
