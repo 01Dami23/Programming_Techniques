@@ -33,13 +33,13 @@ int main() {
         }
 
 
-        // se ho un numero lo trasformo in '*'
+        /* if i have a number i transform it into '*' */
         if (isdigit(current_char)) {
             fputc('*', fout);
             line_length++;
         }
 
-        // se ho un segno di punteggiatura aggiungo uno spazio, se non presente ' ' o '\n'
+        /* if I have a punctuation mark I add a space if not already present ' ' or '\n' */
         else if (current_char == '.' || current_char == ',' || current_char == ';' || current_char == ':' || current_char == '!' || current_char == '?') {
             fputc(current_char, fout);
             char_num++;
@@ -50,13 +50,12 @@ int main() {
                 line_length++;
             }
 
-            // se ho '.' '?' '!' uso un flag per indicare che il prossimo carattere dovra' essere maiuscolo
+            /* If i have '.' '?' '!' i use a flag to indicate that the next char must be uppercase */
             if (current_char == '.' || current_char == '!' || current_char == '?') {
                 next_upper = 1;
             }
         }
 
-        // controlli sui caratteri alfabetici
         else if (isalpha(current_char)) {
             if (next_upper == 1 && !isupper(current_char)) {
                 fputc(toupper(current_char), fout);
@@ -71,14 +70,12 @@ int main() {
             }
         }
 
-        // in tutti gli altri casi eccetto '\n' (trattato alla fine) copio il carattere da un file all'altro
         else if (current_char != '\n') {
             fputc(current_char, fout);
             char_num++;
             line_length++;
         }
 
-        // se la riga ha raggiunto 25 caratteri la tronco, se trovo '\n' e non ho 25 caratteri, aggiungo spazi
         if (current_char == '\n' || line_length == 25 || feof(fin)) {
 
             if (current_char == '\n') {
