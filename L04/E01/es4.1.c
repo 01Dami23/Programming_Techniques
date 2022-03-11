@@ -37,7 +37,7 @@ void sottoSequenze(int V[], int N) {
     int i = 0, j = 0, k = 0, len = 0, max_len = 1, index;
     int max[30];
 
-    // cerco la lunghezza massima dei vettori
+    /* I search for the max length of the vectors */
     while (i < N) {
         len = 0;
 
@@ -50,7 +50,6 @@ void sottoSequenze(int V[], int N) {
         }
     }
 
-    // cerco i vettori di lunghezza massima e li stampo
     while (j < N) {
         len = 0;
         k = 0;
