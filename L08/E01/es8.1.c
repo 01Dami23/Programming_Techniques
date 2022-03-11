@@ -22,7 +22,6 @@ int main(void) {
     int b, h, area, valore, estremo_sup_sx[2];
     rettangolo aree[3];
 
-    // inizializzo a zero i campi del vettore di struct
     for (i = 0; i < 3; i++) {
         aree[i].base = 0;
         aree[i].altezza = 0;
@@ -42,7 +41,7 @@ int main(void) {
                 if (riconosciRegione(M, row_num, column_num, r, c, &b, &h)) {
                     printf("Estremo superiore sx in (%d,%d), base %d e altezza %d\n", r, c, b, h);
 
-                    /* in caso di parità in uno dei campi viene considerato il primo rettangolo trovato */
+                    /* when I have equality in one of the fields I consider the first rectangle I find */
                     estremo_sup_sx[0] = r;
                     estremo_sup_sx[1] = c;
                     area = b * h;
@@ -85,8 +84,7 @@ int leggiMatrice(int M[][MAXC], int maxr, int *nr, int *nc) {
     }
 
     fscanf(fin, "%d %d", nr, nc);
-    /* controllo che il numero di righe e colonne della matrice acquisita sia minore o uguale al massimo
-     * che ho fissato MAXR = MAXC */
+    /* I check that the number of rows and columns of the saved matrix is less than or equal to the set maximum MAXR = MAXC */
     if (*nr > maxr || *nc > maxr) {
         printf("The matrix is too big. The maximum number of rows and columns is %d.\n", MAXR);
         return EXIT_FAILURE;
@@ -105,7 +103,7 @@ int leggiMatrice(int M[][MAXC], int maxr, int *nr, int *nc) {
 int riconosciRegione(int M[][MAXC],int nr, int nc, int r, int c, int *b, int *h) {
     int i = r, j = c;
 
-    /* 1 per successo, quando trovo un estremo superiore sx */
+    /* 1 for success, when I find a left upper bound */
     if ((r == 0 || M[r - 1][c] == 0) && (c == 0 || M[r][c - 1] == 0)) {
         while (i < nr && M[i][c] == 1) {
             (*h)++;
