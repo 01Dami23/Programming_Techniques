@@ -35,7 +35,7 @@ int main(void) {
         return 3;
     }
 
-    /*chiamo la funzione per compilare il dizionario (vettore di struct) da file*/
+    /* I call the function to compile the dictionary from the file */
     dim_dict = compila_dizionario(fdict, dict);
 
     while (fgets(riga, MAXRIGA, fin) != NULL) {
@@ -87,8 +87,7 @@ void ricodifica(FILE *fout, char parola[MAXRIGA + 1], dizionario dict[S], int di
         flag = 0;
         j = 0;
         while (j < dimensione_dict && flag == 0) {
-            /* verifico se la prima lettera di una delle parole del dizionario
-               coincide con una delle lettere della parola */
+            /* I verify if the first letter of one of the words of the dictionary is the same as one of the letters of the word */
             k = i;
             q = 0;
             while (parola[k] == dict[j].old_substring[q] && k < (i + strlen(dict[j].old_substring)) && q < (strlen(dict[j].old_substring))) {
