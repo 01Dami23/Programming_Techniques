@@ -23,7 +23,7 @@ int main() {
         scanf("%d", &v[i]);
     }
 
-    // creo un loop infinito da cui l'utente puo' uscire inserendo P = 0
+    /* I create an infinite loop from which the user can exit by typing 0 as P */
     while (1) {
 
         printf("Enter the number of positions (P < N) you want to rotate (P = 0 to stop the program):\n");
@@ -40,7 +40,6 @@ int main() {
         printf("Enter the direction (sx: 1; dx: -1):\n");
         scanf("%d", &dir);
 
-        // chiamo la funzione, ruoto il vettore e poi lo stampo
         ruota(v, N, P, dir);
 
         printf("The result of the rotation is: ");
